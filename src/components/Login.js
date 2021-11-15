@@ -1,12 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { axiosWithAuth } from '../../helpers/axiosWithAuth';
 
 const Login = () => {
-    
-    return(<ComponentContainer>
+    const [form, setForm] = useState({
+        username: '',
+        password: ''
+    })
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axiosWithAuth().post('.login', form)
+            .then(res => {
+                console.log(res);
+            })
+            .catch((err) => console.log(err));
+    }
+
+    useEffect(() => { })
+
+    const error = '';
+
+    return (<ComponentContainer>
         <ModalContainer>
             <h1>Welcome to Blogger Pro</h1>
             <h2>Please enter your account information.</h2>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor='username'>User Name: </label>
+                    <input id='username' name='username' value={form.username} onChange={handleChange} />
+                    <label htmlFor='password'>Password: </label>
+                    <input id='password' name='password' value={form.password} onChange={handleChange} type={password} />
+                    <button type='submit'>Submit</button>
+                </form>
+            </div>
         </ModalContainer>
     </ComponentContainer>);
 }
