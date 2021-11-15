@@ -19,7 +19,8 @@ const Login = () => {
         e.preventDefault()
         axiosWithAuth().post('.login', form)
             .then(res => {
-                console.log(res);
+                // console.log(res);
+                localStorage.setItem('token', res.data.payload)
             })
             .catch((err) => console.log(err));
     }
