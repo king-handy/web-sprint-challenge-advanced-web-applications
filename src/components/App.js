@@ -8,6 +8,7 @@ import LambdaHeader from './LambdaHeader';
 import View from './View';
 import Login from './Login';
 import Logout from './Logout';
+import Article from './Article';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <LambdaHeader/>
       <Header/>
       <RouteContainer>
+        <PrivateRoute path='/article' component={Article} />
         <Route exact path="/">
           <Login/>
         </Route>          
